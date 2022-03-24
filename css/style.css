@@ -1,0 +1,64 @@
+body {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.664);
+}
+
+button {
+    margin-bottom: 15px;
+}
+
+.board-container {
+    margin: auto;
+    background-color: aliceblue;
+}
+
+table {
+    width: 500px;
+    /* margin: auto; */
+    display: inline-block;
+}
+
+.cell {
+    margin: auto;
+    height: 10px;
+    width: 10px;
+    border: 1px solid black;
+    padding: 25px;
+    cursor: pointer;
+    border-radius: 5%;
+}
+
+
+/* .flagged {
+    height: 5px;
+    background-image: url('/img/flag1.png');
+    background-position: 5px;
+} */
+
+.flagged.hidden::after {
+    content: '🚩';
+    color: rebeccapurple;
+}
+
+.mine {
+    background-color: rgb(126, 37, 37);
+}
+
+.cell.hidden {
+    background-color: rebeccapurple;
+    color: transparent;
+}
+
+.hidden:hover {
+    background-color: rgba(102, 51, 153, 0.678);
+}
+
+.counter {
+    height: 30px;
+    width: 60px;
+    background-color: dodgerblue;
+    display: inline-block;
+    color: rgb(231 226 226 / 88%);
+    font-family: Roboto, sans-serif;
+    font-weight: 900;
+}
