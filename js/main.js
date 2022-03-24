@@ -30,10 +30,10 @@ function initGame() {
     getMinesRandom(gLevel.MINES)
 
 
-    printBoard(gBoard)
+
     renderBoard(gBoard, '.board-container')
-    printBoard(gBoard)
-    console.log(gLevel.MINES);
+
+
 
 }
 
@@ -53,7 +53,7 @@ function levelSelector(level) {
             break
         case 12:
             gLevel.SIZE = 12
-            gLevel.MINES = 32
+            gLevel.MINES = 31
             break
 
     }
@@ -65,9 +65,7 @@ function levelSelector(level) {
 
 //TODO ----------$ CHECK WIN $------------
 function checkWin() {
-    console.log('marked', gGame.markedCount);
-    console.log('shown', gGame.shownCount);
-    console.log('glevel size squared - mines', (gLevel.SIZE * gLevel.SIZE) - gLevel.MINES);
+
     if (gGame.markedCount === gLevel.MINES &&
         (gLevel.SIZE * gLevel.SIZE) - gLevel.MINES === gGame.shownCount) {
         clearInterval(gIntervalId)
@@ -105,29 +103,13 @@ function createBoard(SIZE) {
         for (var j = 0; j < SIZE; j++) {
 
             board[i][j] = {
-                    minesAroundCount: 0,
-                    isShown: false,
-                    isMine: false,
-                    isMarked: false,
-                    symbol: EMPTY
-                }
-                // var cell = board[i][j]
+                minesAroundCount: 0,
+                isShown: false,
+                isMine: false,
+                isMarked: false,
+                symbol: EMPTY
+            }
 
-            // var negsMineCount = setMineNegsCount(i, j, board)
-
-            // if (negsMineCount !== 0 && !cell.isMine) {
-
-            //     cell.minesAroundCount = negsMineCount
-            //     cell = negsMineCount
-            // } else if (negsMineCount === 0 && !cell.isMine) {
-
-            //     cell = EMPTY
-            // }
-            // if (cell.isMine) {
-
-            //     cell.minesAroundCount = negsMineCount
-            //     cell = MINE
-            // }
         }
 
 
@@ -162,7 +144,7 @@ function renderBoard(board, selector) {
     var strHTML = `<table><tbody>`;
     for (var i = 0; i < board.length; i++) {
 
-        strHTML += `<tr class="row">`
+        strHTML += `<tr>`
         for (var j = 0; j < board[i].length; j++) {
             var cell = board[i][j]
             var cellTxt = EMPTY
@@ -224,14 +206,14 @@ function cellClicked(elCell, cellI, cellJ) {
 
             }
         if (elCell.innerText === EMPTY) {
-            console.log('im empty');
+
 
             var negsBlown = expandEmptyNegs(gBoard, cellI, cellJ)
             gGame.shownCount += negsBlown
-            console.log('negs blown', negsBlown);
+
         }
         if (gGame.isOn && gGame.shownCount === 1) {
-            console.log('in timer interval');
+
             gIntervalId = setInterval(gameTimer, 1000)
         }
 

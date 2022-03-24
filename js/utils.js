@@ -47,7 +47,7 @@ function getMinesRandom(mineNum) {
         var randIdxj = getRandomInt(0, gBoard.length)
         gBoard[randIdxI][randIdxj].isMine = true
         gBoard[randIdxI][randIdxj].symbol = MINE
-        console.log(i);
+
 
     }
 
