@@ -59,6 +59,7 @@ table {
 .cell.hidden {
     background-color: rebeccapurple;
     color: transparent;
+    user-select: none;
 }
 
 .hidden:hover {

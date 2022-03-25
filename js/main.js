@@ -10,11 +10,13 @@ const GAME_ON = '😃'
 
 var gIntervalId = undefined
 var gBoard
+
 var gGame = {
     isOn: false,
     shownCount: 0,
     markedCount: 0,
-    secsPassed: 0
+    secsPassed: 0,
+    firstMove: 0
 }
 var gLevel = {
         SIZE: 4,
@@ -53,7 +55,7 @@ function levelSelector(level) {
             break
         case 12:
             gLevel.SIZE = 12
-            gLevel.MINES = 31
+            gLevel.MINES = 30
             break
 
     }
@@ -86,6 +88,7 @@ function restartGame(elBtn) {
     gGame.secsPassed = 0
     gGame.markedCount = 0
     gGame.shownCount = 0
+    gGame.firstMove = 0
     document.querySelector('.marked-count').innerText = gGame.markedCount
     document.querySelector('.timer').innerText = gGame.secsPassed
     initGame()
@@ -188,7 +191,8 @@ function renderBoard(board, selector) {
 
 //TODO  -------------$  CELL CLICKED  $--------------
 function cellClicked(elCell, cellI, cellJ) {
-    if (gGame.shownCount === 0) gGame.isOn = true
+    gGame.firstMove++
+        if (gGame.shownCount === 0) gGame.isOn = true
 
     if (gBoard[cellI][cellJ].isShown) return
 
@@ -212,14 +216,16 @@ function cellClicked(elCell, cellI, cellJ) {
             gGame.shownCount += negsBlown
 
         }
-        if (gGame.isOn && gGame.shownCount === 1) {
+        gBoard[cellI][cellJ].isShown = true
+
+        if (gGame.isOn && gGame.firstMove === 1) {
 
             gIntervalId = setInterval(gameTimer, 1000)
+            gGame.firstMove = 2
         }
 
-
-        gBoard[cellI][cellJ].isShown = true
         elCell.classList.remove('hidden')
+
         checkWin()
     } else {
         return
